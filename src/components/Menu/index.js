@@ -1,6 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import Logo from '../../assets/img/Logo.png';
-import Button from './components/ButtonLink'; // Faz a mesma coisa q o que esta comentado, so que com styled-components
+import Button from '../Button'; // Faz a mesma coisa q o que esta comentado, so que com styled-components
 //import ButtonLink from './components/ButtonLink';
 import './Menu.css';
 
@@ -8,18 +9,18 @@ function Menu(){
     
     return (
         <nav className="Menu">
-            <a href="/">
-                <img className="Logo" src={Logo}/>
-            </a>
+            <Link to="/">
+                <img className="Logo" src={Logo} alt="DevFlix logo"/>
+            </Link>
 
-            <Button as="a" className="ButtonLink" href="/">
+            <Button as={Link} className="ButtonLink" to="/cadastro/video">
                 Novo vídeo
             </Button>
             {/*<ButtonLink className="ButtonLink" href="/">        Para fazer usando props
                 Novo vídeo
     </ButtonLink>*/}
         </nav>
-    )
+    );
 }
 
 export default Menu;
