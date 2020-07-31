@@ -1,10 +1,18 @@
-import React from "react";
+/* eslint-disable linebreak-style */
+import React from 'react';
+import PropTypes from 'prop-types';
 
-function FormField({ label, type, name, value, onChange }) {
+function FormField({
+  label, type, name, value, onChange,
+}) {
+  const fieldId = `id_${name}`;
   return (
     <div>
-      <label>
-        {label}: 
+      <label
+        htmlFor={fieldId}
+      >
+        {label}
+        :
         <input
           type={type}
           value={value}
@@ -13,7 +21,22 @@ function FormField({ label, type, name, value, onChange }) {
         />
       </label>
     </div>
-  )
+  );
 }
+
+FormField.defaultProps = {
+  type: 'text',
+  value: '',
+  onChange: () => {},
+};
+
+FormField.propTypes = {
+  label: PropTypes.string.isRequired,
+  type: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+// Para duvidas a respeito, ou verificar outros tipos, olhar na documentação: https://www.npmjs.com/package/prop-types
+};
 
 export default FormField;
