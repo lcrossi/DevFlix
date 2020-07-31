@@ -1,5 +1,5 @@
 /* eslint-disable linebreak-style */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
@@ -11,6 +11,7 @@ function CadastroCategoria() {
     descricao: '',
     cor: '',
   };
+
   const [categorias, setCategorias] = useState([]);
   const [values, setValues] = useState(valoresIniciais);
 
@@ -27,6 +28,36 @@ function CadastroCategoria() {
       infosDoEvento.target.value,
     );
   }
+
+  useEffect(() => {
+    const URL_TOP = 'http://localhost:8080/categorias';
+    fetch(URL_TOP)
+    .then(async(respostaDoServidor) => {
+      const resposta = await respostaDoServidor.json();  //Coverte a string q esta no browser em obj 
+      setCategorias([
+        ...resposta,   //essa desestruturação é necessária para limpar oq está na memoria do navegador e incluir a nossa nova
+        ]);
+    });
+   
+   
+    /*setTimeout(() => {
+      setCategorias([
+        ...categorias,
+        {
+          "id":1,
+          "nome": "Front End",
+          "descricao": "Uma categoria bacnaaaa",
+          "cor": "#cbd1ff"
+      },
+      {
+          "id":2,
+          "nome": "Front End",
+          "descricao": "Outra categoria bacaninha",
+          "cor": "#cbd1ff"
+      }
+      ])
+    }, 3 * 1000)*/
+  }, [])
 
   return (
     <PageDefault>
@@ -56,7 +87,7 @@ function CadastroCategoria() {
 
         <FormField
           label="Descrição"
-          type="text"
+          type="textarea"
           name="descricao"
           value={values.descricao}
           onChange={handleChange}
@@ -96,6 +127,12 @@ function CadastroCategoria() {
           Cadastrar
         </Button>
       </form>
+
+        {categorias.length === 0 && (
+          <div>
+            Loading...
+          </div>
+        )}
 
       <ul>
         {categorias.map((categoria, indice) => (
