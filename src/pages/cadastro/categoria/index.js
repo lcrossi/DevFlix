@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
 
@@ -14,10 +14,10 @@ function CadastroCategoria() {
 
 
   function setValue(chave, valor) {
-    // chave: nome, descricao, bla, bli
+    
     setValues({
       ...values,
-      [chave]: valor, // nome: 'valor'
+      [chave]: valor,
     })
   }
 
